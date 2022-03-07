@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta charset="UTF-8">
+    <title>Animations JQuery</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    X: <input id="valueX" type="number" placeholder="X" onchange="changePosition();" required/> - X Coordinates
+    <br>
+    Y: <input id="valueY" type="number" placeholder="Y" onchange="changePosition();" required/> - Y Coordinates
+    <br>
+    # <input id="colorHex" type="text" placeholder="6B6EFF (Default)" onchange="changeColor();" maxlength="6" required/> - Set Color (HEX)
+        
+    <p>Press <code>Enter</code> to update the <b>coordinates</b> and the <b>color</b>.</p>
+    
+    X
+    <div class="playground">
+        <div class="circle">
+            
+        </div>
+        <p id="Y">Y</p> 
+    </div>
+    
+
+    <p>The color and coordinates resets after refreshing (F5).</p>
+    
+    <br>
+</body>
+<!-- <footer>
+    Hello World
+</footer> -->
+<script>
+    function changePosition() {
+        var valueInputX = document.getElementById("valueX").value;
+        var valueInputY = document.getElementById("valueY").value;
+        
+        $('.circle').animate({
+            "margin-left": valueInputX + "px",
+           "margin-top": valueInputY + "px"
+            
+        })      
+    }
+
+    function changeColor() {
+        var colorHex = document.getElementById("colorHex").value;
+
+        $('.circle').css({"background-color": "#" + colorHex})
+    }
+    
+</script>
+</html>
