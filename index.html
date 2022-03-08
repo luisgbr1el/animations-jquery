@@ -2,17 +2,18 @@
 <html lang="en_US">
 <head>
     <meta charset="UTF-8">
-    <title>Animations JQuery</title>
+    <title>Animations jQuery</title>
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
-    X: <input id="valueX" type="number" placeholder="X" onchange="changePosition();" required/> - X Coordinates
+<noscript>Sorry, but this page doesn't work without <b>JavaScript</b>.<br></noscript>
+<body>  
+    X: <input id="valueX" type="number" placeholder="X" value="0" onchange="changePosition();" required="" min="0" max="550" /> - X Coordinates
     <br>
-    Y: <input id="valueY" type="number" placeholder="Y" onchange="changePosition();" required/> - Y Coordinates
+    Y: <input id="valueY" type="number" placeholder="Y" value="0" onchange="changePosition();" required="" min="0" max="550"/> - Y Coordinates
     <br>
-    # <input id="colorHex" type="text" placeholder="6B6EFF (Default)" onchange="changeColor();" maxlength="6" required/> - Set Color (HEX)
+    # <input id="colorHex" type="text" placeholder="Color (HEX)" value="6B6EFF" onchange="changeColor();" maxlength="6" required/> - Set Color (HEX)
         
     <p>Press <code>Enter</code> to update the <b>coordinates</b> and the <b>color</b>.</p>
     
@@ -32,6 +33,8 @@
 </footer> -->
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script>
+
+
     (function () {
     $(".circle").draggable(function() {
     });
@@ -40,6 +43,16 @@
     function changePosition() {
     var valueInputX = document.getElementById("valueX").value;
     var valueInputY = document.getElementById("valueY").value;
+
+    (function () {
+        if (valueInputX > 550 || valueInputX < 0) {
+            alert("The min value is 0 and max is 550!");
+            window.refresh();
+        } else if (valueInputY > 550 || valueInputY < 0) {
+            alert("The min value is 0 and max is 550!");
+            window.refresh();
+        }
+    })();
 
     $(".circle").animate({
         left: valueInputX + "px",
