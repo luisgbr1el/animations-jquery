@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Animations JQuery</title>
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -16,13 +17,11 @@
     <p>Press <code>Enter</code> to update the <b>coordinates</b> and the <b>color</b>.</p>
     
     X
-    <div class="playground">
+    <div class="playground" title="Drag me to move around">
         <div class="circle">
-            
         </div>
         <p id="Y">Y</p> 
     </div>
-    
 
     <p>The color and coordinates resets after refreshing (F5).</p>
     
@@ -31,23 +30,59 @@
 <!-- <footer>
     Hello World
 </footer> -->
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script>
+    (function () {
+    $(".circle").draggable(function() {
+    });
+    })();
+
     function changePosition() {
-        var valueInputX = document.getElementById("valueX").value;
-        var valueInputY = document.getElementById("valueY").value;
-        
-        $('.circle').animate({
-            "margin-left": valueInputX + "px",
-           "margin-top": valueInputY + "px"
-            
-        })      
+    var valueInputX = document.getElementById("valueX").value;
+    var valueInputY = document.getElementById("valueY").value;
+
+    $(".circle").animate({
+        left: valueInputX + "px",
+        top: valueInputY + "px",
+    });
     }
 
     function changeColor() {
-        var colorHex = document.getElementById("colorHex").value;
+    var colorHex = document.getElementById("colorHex").value;
 
-        $('.circle').css({"background-color": "#" + colorHex})
+    $(".circle").css({ "background-color": "#" + colorHex });
     }
-    
+
+    $(document).keypress(function (event) {
+    var keycode = event.keyCode ? event.keyCode : event.which;
+
+    //UP
+    if (keycode == "87" || keycode == "119") {
+        $(".circle").css({
+        top: "-=2%",
+        });
+    }
+    //DOWN
+    else if (keycode == "83" || keycode == "115") {
+        $(".circle").css({
+        top: "+=2%",
+        });
+
+    }
+    //LEFT
+    else if (keycode == "65" || keycode == "97") {
+        $(".circle").css({
+        left: "-=2%",
+        });
+    }
+    //RIGHT
+    else if (keycode == "68" || keycode == "100") {
+        $(".circle").css({
+        left: "+=2%",
+        });
+    }
+    event.stopPropagation();
+    });
+
 </script>
 </html>
